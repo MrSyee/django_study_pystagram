@@ -16,6 +16,18 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from photos.views import hello
+from photos.views import detail
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+
+    url(r'^hello/$', hello),
+    url(r'^photos/(?P<pk>[0-9]+)/$',detail, name='detail'),
 ]
+
+# 지정된 경로에 있는 이미지 파일을 불러와서 보여주는 부분
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static('upload_files', document_root=settings.MEDIA_ROOT)
