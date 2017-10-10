@@ -120,6 +120,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# upload한 파일의 설정
+# upload한 파일의 경로 설정
 MEDIA_URL = '/upload_files/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')

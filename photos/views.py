@@ -10,10 +10,11 @@ def hello(request):
 def detail(request, pk):
     photo = get_object_or_404(Photo, pk=pk)
 
-    photo = Photo.objects.get(pk=pk)
+    #photo = Photo.objects.get(pk=pk)
 
     msg = (
     '<p>{pk}번 사진을 보여줄게요.</p>'.format(pk=photo.pk),
     '<p>주소는 {url}</p>'.format(url=photo.image.url),
+    '<p>이미지는 <img src="{url}" /></p>'.format(url=photo.image.url),
     )
     return HttpResponse('\n'.join(msg))
