@@ -118,7 +118,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/assets/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+    ('byebye', os.path.join(BASE_DIR, 'static2'),),
+)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # upload한 파일의 경로 설정
 MEDIA_URL = '/upload_files/'

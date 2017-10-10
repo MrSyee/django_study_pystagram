@@ -15,6 +15,6 @@ def detail(request, pk):
     msg = (
     '<p>{pk}번 사진을 보여줄게요.</p>'.format(pk=photo.pk),
     '<p>주소는 {url}</p>'.format(url=photo.image.url),
-    '<p>이미지는 <img src="{url}" /></p>'.format(url=photo.image.url),
+    '<p>이미지는 <br> <img src="{url}" /></p>'.format(url=photo.image.url),
     )
     return HttpResponse('\n'.join(msg))
