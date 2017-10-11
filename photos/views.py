@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 
 from .models import Photo
 from .forms import PhotoForm
@@ -21,7 +22,15 @@ def detail(request, pk):
     return HttpResponse('\n'.join(msg))
 
 def create(request):
-    form = PhotoForm()
+    if request.method == "GET":
+        form = PhotoForm()
+    elif request.method == "POST":
+        form = PhotoForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            obj = form.save()
+            return redirect(obj)
+
     ctx = {
         'form': form,
     }
