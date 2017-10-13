@@ -9,5 +9,5 @@ from .models import Photo
 class PhotoForm(forms.ModelForm):
     class Meta:
         model = Photo
-        exclude = ('filtered_image',)
-        #fields = ('image', 'content', )
+        fields = ('image', 'content', )
+        #exclude = ('filtered_image',)

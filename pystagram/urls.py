@@ -14,7 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth import views as auth_views # 인증
+from django.conf.urls import include
 
 from photos.views import hello
 from photos.views import detail
@@ -24,12 +28,30 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     url(r'^hello/$', hello),
-    url(r'^photos/(?P<pk>[0-9]+)/$',detail, name='detail'),
+    url(r'^photos/(?P<pk>[0-9]+)/$', detail, name='detail'),
     url(r'^photos/upload/$', create, name='create'),
+
+    url(
+        r'^accounts/login/',
+        auth_views.login,
+        name='login',
+        kwargs={
+            'template_name': 'login.html'
+        }
+    ),
+
+    url(
+        r'^accounts/logout/',
+        auth_views.logout,
+        name='logout',
+        kwargs={
+            'next_page': settings.LOGIN_URL,
+        }
+    ),
+
+    url(r'^users/', include('profiles.urls')),
+
 ]
 
 # 지정된 경로에 있는 이미지 파일을 불러와서 보여주는 부분
-from django.conf import settings
-from django.conf.urls.static import static
-
 urlpatterns += static('upload_files', document_root=settings.MEDIA_ROOT)
